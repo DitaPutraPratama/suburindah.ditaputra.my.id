@@ -31,7 +31,7 @@ composer -V
 
 Jika belum terpasang, Anda bisa download dan instal Composer dari:
 
-👉 https://getcomposer.org/download/
+👉 <https://getcomposer.org/download/>
 
 ### 2. Install Dependency via Composer
 
@@ -59,7 +59,7 @@ cp .env.example .env
 
 Kemudian buka file .env dan edit konfigurasi berikut:
 
-```
+```text
 CI_ENVIRONMENT = development
 
 app.baseURL = 'http://localhost:8080'
@@ -77,13 +77,13 @@ database.default.DBDriver = MySQLi
 
 Setelah semua siap, jalankan server lokal dengan:
 
-```
+```bash
 php spark serve
 ```
 
 Akses aplikasi melalui browser:
 
-```
+```bash
 http://localhost:8080
 ```
 
@@ -107,6 +107,6 @@ Semua konfigurasi penting diletakkan di file .env.
 
 Untuk deploy ke production, ubah:
 
-```
+```text
 CI_ENVIRONMENT = production
 ```
