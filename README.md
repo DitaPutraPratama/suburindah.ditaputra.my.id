@@ -1,8 +1,12 @@
-# Project CodeIgniter 4
+# 🚀 Project CodeIgniter 4
 
-## ⚠️ Masalah Umum Setelah Clone Repo
+Selamat datang di proyek CodeIgniter 4 ini. Jika Anda baru saja meng-clone repository ini, pastikan mengikuti langkah-langkah di bawah agar proyek dapat berjalan dengan lancar.
 
-Jika setelah meng-clone project ini dan menjalankan `php spark serve` muncul error seperti:
+---
+
+## ⚠️ Masalah Umum Setelah Clone
+
+Setelah clone, Anda mungkin mengalami error seperti berikut saat menjalankan `php spark serve`:
 
 Warning: require(.../vendor/codeigniter4/framework/system/Boot.php): Failed to open stream: No such file or directory
 Fatal error: Uncaught Error: Failed opening required ...
@@ -11,68 +15,93 @@ yaml
 Copy
 Edit
 
-Itu berarti folder `vendor/` belum ada karena tidak disertakan dalam repository. Folder ini berisi dependensi dari Composer.
+### 🔍 Penyebab
+
+Error ini terjadi karena folder `vendor/` tidak disertakan dalam repository. Folder ini dihasilkan oleh Composer dan berisi semua dependency proyek.
 
 ---
 
-## ✅ Cara Mengatasi
+## ✅ Langkah-langkah Instalasi
 
-Ikuti langkah-langkah berikut untuk membuat proyek bisa dijalankan:
+### 1. Pastikan Composer Sudah Terpasang
 
-### 1. Pastikan Composer Sudah Terinstal
-
-Cek dengan perintah:
+Jalankan perintah berikut di terminal:
 
 ```bash
 composer -V
-Jika belum ada, silakan download dan install dari https://getcomposer.org.
+Jika belum terpasang, Anda bisa download dan instal Composer dari:
 
-2. Install Dependency dengan Composer
-Masuk ke folder proyek:
+👉 https://getcomposer.org/download/
 
-bash
-Copy
-Edit
-cd nama-folder-proyek
-Lalu jalankan:
+2. Install Dependency via Composer
+Masuk ke folder proyek, lalu jalankan:
 
 bash
 Copy
 Edit
 composer install
-Jika terjadi error karena file tidak bisa dihapus (seperti EncrypterInterface.php), tutup aplikasi yang sedang membuka folder proyek (termasuk VS Code), lalu jalankan ulang composer install di terminal dengan mode administrator.
+Catatan: Jika terjadi error seperti file tidak bisa dihapus (EncrypterInterface.php), itu kemungkinan disebabkan oleh antivirus atau Windows Search Indexer. Solusi:
 
-3. Copy File .env
-Jika file .env belum ada:
+Tutup semua aplikasi yang mengakses folder proyek (VS Code, Explorer, dll)
+
+Jalankan ulang composer install sebagai Administrator
+
+3. Konfigurasi File .env
+File .env berfungsi untuk menyimpan konfigurasi aplikasi seperti database, base URL, dan environment.
+
+Jika file .env belum ada, salin dari contoh:
 
 bash
 Copy
 Edit
 cp .env.example .env
-Atur konfigurasi database, base URL, dan lain-lain sesuai kebutuhan di dalam file .env.
+Kemudian buka file .env dan edit konfigurasi berikut:
 
-4. Jalankan Proyek
-Setelah selesai, jalankan server lokal:
+dotenv
+Copy
+Edit
+CI_ENVIRONMENT = development
+
+app.baseURL = 'http://localhost:8080'
+
+database.default.hostname = localhost
+database.default.database = nama_database_anda
+database.default.username = root
+database.default.password =
+database.default.DBDriver = MySQLi
+Ubah nama_database_anda, username, dan password sesuai konfigurasi lokal Anda.
+
+4. Jalankan Aplikasi
+Setelah semua siap, jalankan server lokal dengan:
 
 bash
 Copy
 Edit
 php spark serve
-Buka browser di http://localhost:8080
+Akses aplikasi melalui browser:
 
-🛠 Fitur Lain
-Framework: CodeIgniter 4
+arduino
+Copy
+Edit
+http://localhost:8080
+🧰 Teknologi yang Digunakan
+PHP 8.1 atau lebih baru
 
-Composer untuk manajemen dependensi
+CodeIgniter 4
 
-Direkomendasikan menggunakan PHP 8.1 atau lebih baru
+Composer
 
-📌 Catatan
-Jika masih mengalami error, pastikan:
+MySQL / MariaDB (default)
 
-PHP dan Composer sudah benar-benar terpasang
+📌 Catatan Tambahan
+Jangan mengubah isi folder vendor/ secara manual.
 
-Folder proyek tidak dikunci antivirus atau search indexer
+Semua konfigurasi penting diletakkan di file .env.
 
-File .env sudah dikonfigurasi
+Untuk deploy ke production, ubah:
+
+dotenv
+Copy
+Edit
+CI_ENVIRONMENT = production
 ```
