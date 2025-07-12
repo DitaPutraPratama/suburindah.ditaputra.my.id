@@ -1,4 +1,5 @@
 <!-- Hero Section -->
+<h1>coba dev</h1>
 <section id="hero" class="d-flex align-items-center">
     <!-- batas 3 gambar -->
     <?php foreach ($slides as $s) : ?>
