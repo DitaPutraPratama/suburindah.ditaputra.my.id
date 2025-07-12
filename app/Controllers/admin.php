@@ -31,9 +31,13 @@ class Admin extends BaseController
         $email    = filter_var($this->request->getPost('email'), FILTER_SANITIZE_EMAIL);
         $password = $this->request->getPost('password');
 
+        if (empty($email) || empty($password)) {
+            $this->session->setFlashdata('error', 'Email dan password wajib diisi.');
+            return redirect()->to('admin/login')->withInput(); // supaya input tetap terisi
+        }
+
         // Mencari data user berdasarkan email
         $user = $this->userModel->where('email', $email)->first();
-        // echo "<pre>";print_r($password);echo "</pre>";die;
 
         if ($user) {
             // Memeriksa apakah password sesuai dengan hash di database

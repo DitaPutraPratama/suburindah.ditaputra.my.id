@@ -137,71 +137,6 @@
                         </div>
                     </div>
                 <?php endforeach ?>
-
-                <!-- <div class="carousel-item">
-                    <div class="product-card card border-0 shadow-sm mx-2">
-                        <div class="product-img-container">
-                            <img src="https://placehold.co/400x300" class="card-img-top" alt="Genteng Lengkung Klasik">
-                        </div>
-                        <div class="card-body p-4">
-                            <h5 class="card-title">Genteng Lengkung Klasik</h5>
-                            <p class="card-text text-muted">Model tradisional dengan lengkungan elegan, memberikan tampilan klasik pada bangunan.</p>
-                            <a href="#" class="product-link">Lihat Detail</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="carousel-item">
-                    <div class="product-card card border-0 shadow-sm mx-2">
-                        <div class="product-img-container">
-                            <img src="https://placehold.co/400x300" class="card-img-top" alt="Genteng Romawi">
-                        </div>
-                        <div class="card-body p-4">
-                            <h5 class="card-title">Genteng Romawi</h5>
-                            <p class="card-text text-muted">Terinspirasi dari arsitektur Romawi kuno, kuat dan tahan terhadap cuaca ekstrem.</p>
-                            <a href="#" class="product-link">Lihat Detail</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="carousel-item">
-                    <div class="product-card card border-0 shadow-sm mx-2">
-                        <div class="product-img-container">
-                            <img src="https://placehold.co/400x300" class="card-img-top" alt="Genteng Minimalis">
-                        </div>
-                        <div class="card-body p-4">
-                            <h5 class="card-title">Genteng Minimalis</h5>
-                            <p class="card-text text-muted">Desain sederhana namun elegan, cocok untuk rumah bergaya minimalis modern.</p>
-                            <a href="#" class="product-link">Lihat Detail</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="carousel-item">
-                    <div class="product-card card border-0 shadow-sm mx-2">
-                        <div class="product-img-container">
-                            <img src="https://placehold.co/400x300" class="card-img-top" alt="Genteng Mediterania">
-                        </div>
-                        <div class="card-body p-4">
-                            <h5 class="card-title">Genteng Mediterania</h5>
-                            <p class="card-text text-muted">Gaya mediterania yang hangat dengan warna-warna alami tanah liat.</p>
-                            <a href="#" class="product-link">Lihat Detail</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="carousel-item">
-                    <div class="product-card card border-0 shadow-sm mx-2">
-                        <div class="product-img-container">
-                            <img src="https://placehold.co/400x300" class="card-img-top" alt="Genteng Eksotis">
-                        </div>
-                        <div class="card-body p-4">
-                            <h5 class="card-title">Genteng Eksotis</h5>
-                            <p class="card-text text-muted">Desain unik dengan tekstur khusus, memberikan karakter pada atap rumah Anda.</p>
-                            <a href="#" class="product-link">Lihat Detail</a>
-                        </div>
-                    </div>
-                </div> -->
             </div>
 
             <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
@@ -251,39 +186,49 @@
                 <div class="contact-form-container p-4 p-md-5 rounded shadow">
                     <h3 class="mb-4">Kirim Pesan</h3>
 
-                    <div id="formSuccess" class="alert alert-success d-none">
+                    <div id="formSuccess" class="alert alert-success alert-dismissible fade show d-none" role="alert">
                         Terima kasih! Pesan Anda telah terkirim. Kami akan menghubungi Anda segera.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
 
+
                     <form id="contactForm">
+                        <?= csrf_field() ?>
+
                         <div class="mb-3">
-                            <label for="name" class="form-label">Nama Lengkap</label>
-                            <input type="text" class="form-control" id="name" placeholder="Masukkan nama lengkap Anda" required>
+                            <label for="name">Nama Lengkap</label>
+                            <input type="text" class="form-control" id="name" required>
                         </div>
 
                         <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" placeholder="Masukkan alamat email Anda" required>
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" required>
                         </div>
 
                         <div class="mb-3">
-                            <label for="phone" class="form-label">Nomor Telepon</label>
-                            <input type="tel" class="form-control" id="phone" placeholder="Masukkan nomor telepon Anda">
+                            <label for="phone">No. Telepon</label>
+                            <input type="text" class="form-control" id="phone">
                         </div>
 
                         <div class="mb-4">
-                            <label for="message" class="form-label">Pesan</label>
-                            <textarea class="form-control" id="message" rows="5" placeholder="Tulis pesan Anda di sini..." required></textarea>
+                            <label for="message">Pesan</label>
+                            <textarea class="form-control" id="message" rows="5" required></textarea>
                         </div>
 
-                        <button type="submit"
-                            data-sitekey="reCAPTCHA_site_key"
-                            data-callback='onSubmit'
-                            data-action='submit'
-                            class="btn btn-primary w-100" id="submitBtn">
+                        <!-- ✅ Google reCAPTCHA v2 checkbox -->
+                        <div class="mb-3">
+                            <div class="g-recaptcha" data-sitekey="6LfA7YArAAAAAG8IS9fR_8a1h9nKPhpvSrUcKkgN"></div>
+                        </div>
+
+                        <div id="formSuccess" class="alert alert-success d-none">Pesan berhasil dikirim.</div>
+
+                        <button type="submit" class="btn btn-primary w-100" id="submitBtn">
                             Kirim Pesan <i class="bi bi-send ms-2"></i>
                         </button>
                     </form>
+
+                    <!-- reCAPTCHA script -->
+                    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
                 </div>
             </div>
 

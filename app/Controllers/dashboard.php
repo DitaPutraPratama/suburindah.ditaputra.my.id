@@ -25,6 +25,10 @@ class Dashboard extends BaseController
         $data['page'] = [
             ['name' => 'Dashboard', 'url' => base_url('dashboard')]
         ];
+        $Dashboards = new Dashboards();
+        $data['massages'] = $Dashboards->orderBy('created_at', 'DESC')->paginate(10);
+        $data['pager'] = $Dashboards->pager;
+
         echo view('admin/template/header', $data);
         echo view('admin/template/nav', $data);
         echo view('admin/dashboard', $data);
