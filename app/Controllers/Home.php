@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use CodeIgniter\Controller;
+
 class Home extends BaseController
 {
     protected $session;
@@ -63,5 +65,54 @@ class Home extends BaseController
         echo view('template/nav');
         echo view('home');
         echo view('template/footer');
+    }
+
+    public function sendMassage()
+    {
+        $recaptchaToken = $this->request->getPost('g-recaptcha-response');
+
+        if (empty($recaptchaToken)) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'CAPTCHA wajib diisi.'
+            ]);
+        }
+
+        // Verifikasi token dengan Google
+        $secretKey = '6LfA7YArAAAAADJK_zxIJLnmYdzKb6PSRCB__NbP'; // ganti dengan secret key Google kamu
+        $verifyURL = 'https://www.google.com/recaptcha/api/siteverify';
+
+        $response = file_get_contents($verifyURL . '?secret=' . $secretKey . '&response=' . $recaptchaToken);
+        $result = json_decode($response);
+
+        if (!$result->success) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Verifikasi CAPTCHA gagal.'
+            ]);
+        }
+        if ($this->request->isAJAX()) {
+            $db = \Config\Database::connect();
+
+            $data = [
+                'name'    => $this->request->getPost('name'),
+                'email'   => $this->request->getPost('email'),
+                'phone'   => $this->request->getPost('phone'),
+                'message' => $this->request->getPost('message'),
+            ];
+
+            // Insert data ke tabel contact_messages
+            $db->table('contact_messages')->insert($data);
+
+            return $this->response->setJSON([
+                'status'  => 'success',
+                'message' => 'Pesan berhasil dikirim.'
+            ]);
+        }
+
+        return $this->response->setStatusCode(400)->setJSON([
+            'status'  => 'error',
+            'message' => 'Permintaan tidak valid.'
+        ]);
     }
 }

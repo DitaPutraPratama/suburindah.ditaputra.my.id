@@ -1,9 +1,4 @@
 $(document).ready(function () {
-    // Google reCAPTCHA
-    function onSubmit(token) {
-        $('#contactForm').submit()
-    }
-
     // Define base URL
     const BASE_URL = window.location.origin + '/'
     // Set current year in footer
@@ -85,39 +80,102 @@ $(document).ready(function () {
         )
     })
 
-    // Contact form submission
+    function sanitizeInput(str) {
+        return String(str)
+            .replace(/<[^>]*>?/gm, '') // hapus HTML tag
+            .replace(/\s+/g, ' ') // ganti multiple whitespace dengan satu spasi
+            .trim() // hapus spasi depan-belakang
+    }
+
     $('#contactForm').on('submit', function (e) {
         e.preventDefault()
 
         // Get form values
-        const name = $('#name').val()
-        const email = $('#email').val()
-        const phone = $('#phone').val()
-        const message = $('#message').val()
+        const name = sanitizeInput($('#name').val())
+        const email = sanitizeInput($('#email').val())
+        const phone = sanitizeInput($('#phone').val())
+        const message = sanitizeInput($('#message').val())
+        const csrfInput = $('input[type="hidden"][name^="csrf_"]')
+        const captchaResponse = grecaptcha.getResponse()
+
+        if (!captchaResponse) {
+            alert('Silakan isi reCAPTCHA terlebih dahulu.')
+            return
+        }
+
+        // Ambil name dan value-nya secara dinamis
+        const csrfName = csrfInput.attr('name')
+        const csrfHash = csrfInput.val()
+
+        const formData = {
+            name: name,
+            email: email,
+            phone: phone,
+            message: message,
+            'g-recaptcha-response': captchaResponse,
+        }
+
+        // Tambahkan CSRF ke dalam objek
+        formData[csrfName] = csrfHash
 
         // Disable submit button and show loading state
         $('#submitBtn')
             .prop('disabled', true)
             .html('Mengirim... <i class="bi bi-hourglass-split ms-2"></i>')
 
-        // Simulate form submission with delay
-        setTimeout(function () {
-            // Reset form
-            $('#contactForm')[0].reset()
+        // Kirim data ke server via AJAX
+        $.ajax({
+            url: BASE_URL + 'sendMassage',
+            method: 'POST',
+            data: formData,
+            success: function (response) {
+                if (response.status === 'success') {
+                    // Reset form
+                    $('#contactForm')[0].reset()
 
-            // Show success message
-            $('#formSuccess').removeClass('d-none')
+                    // Show success message
+                    $('#formSuccess')
+                        .removeClass('d-none')
+                        .text(response.message)
 
-            // Reset button
-            $('#submitBtn')
-                .prop('disabled', false)
-                .html('Kirim Pesan <i class="bi bi-send ms-2"></i>')
+                    // Reset button
+                    $('#submitBtn')
+                        .prop('disabled', false)
+                        .html('Kirim Pesan <i class="bi bi-send ms-2"></i>')
 
-            // Hide success message after 5 seconds
-            setTimeout(function () {
-                $('#formSuccess').addClass('d-none')
-            }, 5000)
-        }, 1500)
+                    // Hide success message after 5 seconds
+                    setTimeout(function () {
+                        $('#formSuccess').addClass('d-none')
+                    }, 5000)
+                } else {
+                    // Handle jika status bukan "success"
+                    alert(
+                        response.message || 'Terjadi kesalahan saat mengirim.'
+                    )
+                    $('#submitBtn')
+                        .prop('disabled', false)
+                        .html('Kirim Pesan <i class="bi bi-send ms-2"></i>')
+                }
+            },
+            error: function (xhr, status, error) {
+                let message = 'Terjadi kesalahan saat mengirim pesan.'
+
+                if (
+                    xhr.status === 401 &&
+                    xhr.responseJSON &&
+                    xhr.responseJSON.message
+                ) {
+                    message = xhr.responseJSON.message // Akses ditolak
+                }
+
+                alert(message)
+
+                // Reset button
+                $('#submitBtn')
+                    .prop('disabled', false)
+                    .html('Kirim Pesan <i class="bi bi-send ms-2"></i>')
+            },
+        })
     })
 
     // Initialize Bootstrap tooltips
