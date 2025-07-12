@@ -18,7 +18,14 @@ class App extends BaseConfig
      */
     // public string $baseURL = 'https://suburindah.ditaputra.my.id/';
     // public string $baseURL = 'http://localhost:8080/';
-    public string $baseURL = getenv('app.baseURL') ?: 'http://localhost:8080/';
+    public string $baseURL;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->baseURL = env('app.baseURL', 'http://localhost:8080/');
+    }
 
 
     /**
