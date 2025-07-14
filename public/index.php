@@ -5,6 +5,10 @@
 //     include 'maintenance.php';
 //     exit;
 // }
+
+// seting environment darurat
+define('ENVIRONMENT', 'production');
+
 /*
  *---------------------------------------------------------------
  * CHECK PHP VERSION
