@@ -81,7 +81,7 @@ class Home extends BaseController
         }
 
         // Verifikasi token dengan Google
-        $secretKey = '6LfA7YArAAAAADJK_zxIJLnmYdzKb6PSRCB__NbP'; // ganti dengan secret key Google kamu
+        $secretKey = env('RECAPCHA_KEY');
         $verifyURL = 'https://www.google.com/recaptcha/api/siteverify';
 
         $response = file_get_contents($verifyURL . '?secret=' . $secretKey . '&response=' . $recaptchaToken);
