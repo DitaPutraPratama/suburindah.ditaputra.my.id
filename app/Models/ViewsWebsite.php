@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class ViewsWebsite extends Model
 {
     // Menentukan nama tabel yang digunakan
-    protected $table = 'ViewsWebsite';
+    protected $table = 'viewswebsite';
 
     // Menentukan primary key dari tabel
     protected $primaryKey = 'id_views';
