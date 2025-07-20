@@ -26,32 +26,32 @@ class Home extends BaseController
         // hero image
         $data['slides'] = [
             (object)[
-                'url' => 'https://img.antarafoto.com/cache/1200x811/2023/09/30/produksi-genteng-di-magetan-18cq6-dom.webp'
+                'url' => base_url('/assets/images/web/latar.jpg'),
             ],
             (object)[
-                'url' => 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgStYkId2caZiHJIXoqbpODyMd9Dyks2HYkXooj-uSd535bKmMl2KYXcmMgP-2C5no2WV-bbD4uEYVU1yd3GxByCcuzWZJBAf5myONJabkEkA-nZCcCXiLA6WTFvVqzO0Wv2QiS4q_hNf8/s1600/klunthung+dua.JPG'
+                'url' => base_url('/assets/images/web/luntung2.jpg'),
             ],
             (object)[
-                'url' => 'https://direktoriukm.com/media/fotoproduk/135/IMG00894-20150716-1305_1.jpg'
+                'url' => base_url('/assets/images/web/tobong.jpg'),
             ]
         ];
 
         // tentang kami
-        $data['tentang'] = 'https://img.antarafoto.com/cache/1200x811/2023/09/30/produksi-genteng-di-magetan-18cq6-dom.webp';
+        $data['tentang'] = base_url('/assets/images/web/gentengmunggah.jpg');
         // product data
         $data['genteng'] = [
             (object)[
                 'nama'      => 'Genteng Press',
                 'deskripsi' => 'Genteng Press memberikan tampilan elegan dan kekuatan tahan lama atap rumah',
-                'foto'      => 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgStYkId2caZiHJIXoqbpODyMd9Dyks2HYkXooj-uSd535bKmMl2KYXcmMgP-2C5no2WV-bbD4uEYVU1yd3GxByCcuzWZJBAf5myONJabkEkA-nZCcCXiLA6WTFvVqzO0Wv2QiS4q_hNf8/s1600/klunthung+dua.JPG',
+                'foto'      => base_url('/assets/images/web/luntung2.jpg'),
                 'po'        => false
             ],
-            (object)[
-                'nama'      => 'Genteng Mantili',
-                'deskripsi' => 'Genteng Mantili menonjolkan desain unik dengan pola tradisional, menghadirkan kesan autentik',
-                'foto'      => 'https://direktoriukm.com/media/fotoproduk/135/IMG00894-20150716-1305_1.jpg',
-                'po'        => true
-            ],
+            // (object)[
+            //     'nama'      => 'Genteng Mantili',
+            //     'deskripsi' => 'Genteng Mantili menonjolkan desain unik dengan pola tradisional, menghadirkan kesan autentik',
+            //     'foto'      => 'https://direktoriukm.com/media/fotoproduk/135/IMG00894-20150716-1305_1.jpg',
+            //     'po'        => true
+            // ],
             (object)[
                 'nama'      => 'Genteng Wuwung',
                 'deskripsi' => 'Genteng Wuwung menghadirkan lekukan artistik yang menggabungkan estetika klasik dan modern',
@@ -61,6 +61,8 @@ class Home extends BaseController
         ];
 
         $data['title'] = 'Subur Indah';
+        log_page_view('home'); // Log page view
+        log_visitor();
         echo view('template/header', $data);
         echo view('template/nav');
         echo view('home');

@@ -12,9 +12,6 @@
                         <a class="nav-link" data-lte-toggle="sidebar" href="#" role="button"><i class="bi bi-list"></i></a>
                     </li>
                     <li class="nav-item d-none d-md-block">
-                        <a href="<?= base_url() ?>" class="nav-link">Home</a>
-                    </li>
-                    <li class="nav-item d-none d-md-block">
                         <a href="<?= base_url() ?>" class="nav-link">Konten</a>
                     </li>
                 </ul>
@@ -36,7 +33,7 @@
                                 src="<?= base_url('assets/images/') ?>user2-160x160.jpg"
                                 class="user-image rounded-circle shadow"
                                 alt="User Image" />
-                            <span class="d-none d-md-inline">Alexander Pierce</span>
+                            <span class="d-none d-md-inline"><?= session()->get('username') ?></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                             <!--begin::User Image-->
@@ -46,11 +43,11 @@
                                     class="rounded-circle shadow"
                                     alt="User Image" />
                                 <p>
-                                    Alexander Pierce - Web Developer
+                                    <?= session()->get('username') ?> - <?= session()->get('role') ?>
                                 </p>
                             </li>
                             <li class="user-footer">
-                                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                <!-- <a href="#" class="btn btn-default btn-flat">Profile</a> -->
                                 <a href="<?= base_url('admin/logout') ?>" class="btn btn-default btn-flat float-end">Logout</a>
                             </li>
                             <!--end::Menu Footer-->
@@ -118,7 +115,7 @@
                         class="brand-image opacity-75 shadow" />
                     <!--end::Brand Image-->
                     <!--begin::Brand Text-->
-                    <span class="brand-text fw-light">AdminLTE 4</span>
+                    <span class="brand-text fw-light">CMS Suburindah</span>
                     <!--end::Brand Text-->
                 </a>
                 <!--end::Brand Link-->
@@ -133,27 +130,33 @@
                         data-lte-toggle="treeview"
                         role="menu"
                         data-accordion="false">
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon bi bi-speedometer"></i>
                                 <p>
-                                    Dashboard
+                                    belum di pakai
                                     <i class="nav-arrow bi bi-chevron-right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="../index.html" class="nav-link active">
+                                    <a href="#" class="nav-link active">
                                         <i class="nav-icon bi bi-circle"></i>
                                         <p>Dashboard v1</p>
                                     </a>
                                 </li>
                             </ul>
+                        </li> -->
+                        <li class="nav-item">
+                            <a href="<?= base_url('admin/dashboard') ?>" class="nav-link">
+                                <i class="nav-icon bi bi-speedometer"></i>
+                                <p>Dashboard</p>
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../index.html" class="nav-link active">
-                                <i class="nav-icon bi bi-circle"></i>
-                                <p>Dashboard v1</p>
+                            <a href="<?= base_url('admin/pesan') ?>" class="nav-link">
+                                <i class="nav-icon bi bi-envelope"></i>
+                                <p>Pesan</p>
                             </a>
                         </li>
                     </ul>

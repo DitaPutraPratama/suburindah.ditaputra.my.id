@@ -102,6 +102,21 @@
         });
     })();
 </script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        let currentHref = window.location.href;
+
+        $('.nav-link').each(function() {
+            let linkHref = this.href; // full URL dari <a>
+
+            if (currentHref === linkHref || currentHref.startsWith(linkHref)) {
+                $('.nav-link').removeClass('active'); // opsional: reset dulu
+                $(this).addClass('active');
+            }
+        });
+    });
+</script>
 <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
 <!--end::OverlayScrollbars Configure-->
 <!--end::Script-->

@@ -6,7 +6,7 @@
     <?php endif; ?>
     <div class="login-box">
         <div class="login-logo">
-            <a href="#"><b>Admin</b>LTE</a>
+            <a href="<?= base_url() ?>"><b>CMS Website Suburindah</b></a>
         </div>
         <!-- /.login-logo -->
         <div class="card">
@@ -49,10 +49,10 @@
                     </a>
                 </div> -->
                 <!-- /.social-auth-links -->
-                <p class="mb-1"><a href="#">Lupa Password (dalam pengerjaan)</a></p>
+                <!-- <p class="mb-1"><a href="#">Lupa Password (dalam pengerjaan)</a></p>
                 <p class="mb-0">
                     <a href="<?= base_url('admin/register') ?>" class="text-center">Daftar</a>
-                </p>
+                </p> -->
             </div>
             <!-- /.login-card-body -->
         </div>

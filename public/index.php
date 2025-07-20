@@ -2,12 +2,12 @@
 
 // define('ENVIRONMENT', 'development');
 // if ($_SERVER['REMOTE_ADDR'] !== $allowedIp) {
-include 'maintenance.php';
-exit;
+// include 'maintenance.php';
+// exit;
 // }
 
 // seting environment darurat
-define('ENVIRONMENT', 'production');
+// define('ENVIRONMENT', 'production');
 
 /*
  *---------------------------------------------------------------
