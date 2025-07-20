@@ -28,7 +28,7 @@
                 <h5 class="mb-3">Hubungi Kami</h5>
                 <address class="footer-text">
                     <p>
-                        Dusun Jajar, Desa Talesan<br>
+                        Wonotoko, Nadi, Desa Talesan<br>
                         Kecamatan Purwantoro, Kabupaten Wonogiri<br>
                         Jawa Tengah, Indonesia 57695
                     </p>
